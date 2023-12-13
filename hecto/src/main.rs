@@ -17,7 +17,7 @@ fn main() {
         }
 
         match b {
-            OK(b) => {
+            Ok(b) => {
                 let c = b as char;
                 if c.is_control() {
                     println!("{:?}\r", b);
@@ -38,6 +38,6 @@ fn to_ctrl_byte(c: char) -> u8 {
     byte & 0b0001_1111
 }
 
-fn die(e: std::io::Error) {
+fn die(e: io::Error) {
     println!("{}", e);
 }
