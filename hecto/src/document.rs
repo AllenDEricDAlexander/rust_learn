@@ -3,7 +3,8 @@ use std::fs;
 
 #[derive(Default)]
 pub struct Document {
-    pub rows: Vec<Row>,
+    rows: Vec<Row>,
+    pub filename: Option<String>,
 }
 
 impl Document {
@@ -14,7 +15,8 @@ impl Document {
             rows.push(Row::from(value));
         }
         Ok(Self {
-            rows
+            rows,
+            filename: Some(filename.to_string()),
         })
     }
 
