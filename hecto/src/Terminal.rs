@@ -16,7 +16,7 @@ pub struct Terminal {
 }
 
 impl Terminal {
-    pub fn default() -> Result<Terminal, std::io::Error> {
+    pub fn default() -> Result<Terminal, io::Error> {
         let size = termion::terminal_size()?;
         Ok(Terminal {
             size: Size {

@@ -8,3 +8,4 @@ authors = ["atluofu <mqa010225@163.com>"]
 
 [dependencies]
 termion = "2.0.3"
+unicode-segmentation = "1.10.1"
