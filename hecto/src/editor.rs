@@ -126,7 +126,6 @@ impl Editor {
         println!("{}\r", status);
         Terminal::reset_fg_color();
         Terminal::reset_bg_color();
-        ;
     }
 
     fn draw_message_bar(&self) {
