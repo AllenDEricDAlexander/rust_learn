@@ -1,4 +1,4 @@
-use std::io::{self, stdout};
+use std::io::{self, stdout, Write};
 use termion::raw::IntoRawMode;
 use termion::event::Key;
 use termion::input::TermRead;
@@ -11,17 +11,32 @@ impl Editor {
     pub fn run(&mut self) {
         let _stdout = stdout().into_raw_mode().unwrap();
         loop {
-            if let Err(error) = self.process_keypress() {
+            if let Err(error) = self.refresh_screen() {
                 die(error);
             }
             if self.should_quit {
                 break;
+            }
+            if let Err(error) = self.process_keypress() {
+                die(error);
             }
         }
     }
 
     pub fn default() -> Editor {
         Self { should_quit: false }
+    }
+
+    fn refresh_screen(&self) -> Result<(), io::Error> {
+        print!("{}{}", termion::clear::All, termion::cursor::Goto(1, 1));
+        if self.should_quit {
+            println!("Goodbye!\r");
+        } else {
+            self.draw_rows();
+            println!("{}", termion::cursor::Goto(1, 1));
+        }
+        stdout().flush()?;
+        Ok(())
     }
 
     fn process_keypress(&mut self) -> Result<(), io::Error> {
@@ -31,6 +46,12 @@ impl Editor {
             _ => (),
         }
         Ok(())
+    }
+
+    fn draw_rows(&self) {
+        for _ in 0..24 {
+            print!("!\r");
+        }
     }
 }
 
@@ -43,5 +64,6 @@ fn read_key() -> Result<Key, io::Error> {
 }
 
 fn die(e: io::Error) {
+    println!("{}", termion::clear::All);
     println!("{}", e);
 }
