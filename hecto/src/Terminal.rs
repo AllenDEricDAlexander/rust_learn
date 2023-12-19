@@ -5,6 +5,7 @@ use termion::input::TermRead;
 use termion::raw::{IntoRawMode, RawTerminal};
 use termion::color;
 
+
 pub struct Size {
     pub width: u16,
     pub height: u16,
