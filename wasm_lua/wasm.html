@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Project</title>
+    <script type="module">
+        const wasm = await import('wasm_lua.js');
+        const stdout = document.getElementById('stdout');
+        const stderr = document.getElementById('stderr');
+        const module = {
+            print(str) {
+                const line = document.createElement('p');
+                line.innerText = str;
+                stdout.appendChild(line);
+            },
+            printErr(str) {
+                const line = document.createElement('p');
+                line.innerText = str;
+                stderr.appendChild(line);
+            }
+        };
+        const myProject = await wasm.default(module);
+
+        const luaInstance = myProject.ccall('lua_new', 'number', [], []);
+        const luaExecute = myProject.cwrap('lua_execute', null, ['number', 'string']);
+
+        window.execute = () => {
+            // clear the output
+            stdout.innerHTML = '';
+            stderr.innerHTML = '';
+            const code = document.getElementById('code').value;
+            luaExecute(luaInstance, code);
+        }
+    </script>
+</head>
+<body>
+<div>
+    <h3>Code</h3>
+    <label for="code"></label><textarea id="code"></textarea>
+    <button>Execute</button>
+</div>
+<div style="display: flex">
+    <div>
+        <h3>Stderr</h3>
+        <div id="stderr"></div>
+    </div>
+    <hr>
+    <div>
+        <h3>Stdout</h3>
+        <div id="stdout"></div>
+    </div>
+</div>
+</body>
+</html>
