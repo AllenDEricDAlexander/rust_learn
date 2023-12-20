@@ -1,24 +1,18 @@
-fn main() {
-    println!("hello world!");
-}
+use std::ffi::{c_char, CStr};
+use mlua::Lua;
 
 #[no_mangle]
-pub extern "C" fn lua_new() -> *mut mlua::Lua {
-    let lua = mlua::Lua::new();
+pub extern "C" fn lua_new() -> *mut Lua {
+    let lua = Lua::new();
     Box::into_raw(Box::new(lua))
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn lua_execute(lua: *mut mlua::Lua, to_execute: *const std::ffi::c_char) {
-    // casting the raw pointer of the created lua instance back to a usable Rust struct
-    let lua: &mut mlua::Lua = &mut *lua;
-    // converting the c string into a `CStr` (which then can be converted to a `String`)
-    let to_execute = std::ffi::CStr::from_ptr(to_execute);
+pub unsafe extern "C" fn lua_execute(lua: *mut Lua, to_execute: *const c_char) {
+    let lua: &mut Lua = &mut *lua;
+    let to_execute = CStr::from_ptr(to_execute);
 
-    // execute the input code via the lua interpreter
     if let Err(err) = lua.load(&to_execute.to_string_lossy().to_string()).exec() {
-        // because emscripten wraps stderr, we are able to catch the error on the js
-        // side just fine
         eprintln!("{}", err)
     }
 }
