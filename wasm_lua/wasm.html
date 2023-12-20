@@ -3,7 +3,7 @@
 <head>
     <title>My Project</title>
     <script type="module">
-        const wasm = await import('wasm_lua.js');
+        const wasm = await import('./wasm_lua.js');
         const stdout = document.getElementById('stdout');
         const stderr = document.getElementById('stderr');
         const module = {
