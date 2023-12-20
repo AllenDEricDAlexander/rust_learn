@@ -1,0 +1,5 @@
+cargo:rustc-link-arg=-sEXPORTED_RUNTIME_METHODS=['cwrap','ccall']
+cargo:rustc-link-arg=-sEXPORT_ES6=1
+cargo:rustc-link-arg=-sERROR_ON_UNDEFINED_SYMBOLS=0
+cargo:rustc-link-arg=--no-entry
+cargo:rustc-link-arg=-o/home/rust_learn/wasm_lua/target/wasm32-unknown-emscripten/debug/wasm_lua.js

@@ -1,0 +1,1 @@
+{"rustc":3462548589188548201,"features":"","target":0,"profile":0,"path":0,"deps":[[1753671207682731492,"build_script_main",false,7526249165551021493]],"local":[{"RerunIfChanged":{"output":"wasm32-unknown-emscripten/debug/build/mlua-sys-badfce6c1e271f4d/output","paths":["build"]}}],"rustflags":[],"metadata":0,"config":0,"compile_kind":0}
