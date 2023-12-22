@@ -1,4 +1,4 @@
-use ggez::glam::Vec2;
+use glam::Vec2;
 use ggez::{conf, event, Context, GameResult,
            graphics::{self, DrawParam, Image}};
 use specs::{
