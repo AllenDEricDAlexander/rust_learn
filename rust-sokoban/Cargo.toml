@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 ggez = "0.7"
+glam = "0.25.0"
 specs = { version = "0.17.0", features = ["specs-derive"] }
 image = "0.24.7"
