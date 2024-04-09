@@ -1,12 +1,28 @@
+use std::fmt::{Display, Formatter};
 use specs::{Component, NullStorage, VecStorage, World, WorldExt};
 
-// Components
 #[derive(Debug, Component, Clone, Copy)]
 #[storage(VecStorage)]
 pub struct Position {
     pub x: u8,
     pub y: u8,
     pub z: u8,
+}
+
+#[derive(PartialEq)]
+pub enum BoxColour {
+    Red,
+    Blue,
+}
+
+impl Display for BoxColour {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            BoxColour::Blue => "blue",
+            BoxColour::Red => "red",
+        })?;
+        Ok(())
+    }
 }
 
 #[derive(Component)]
@@ -25,11 +41,15 @@ pub struct Player {}
 
 #[derive(Component)]
 #[storage(VecStorage)]
-pub struct Box {}
+pub struct Box {
+    pub colour: BoxColour,
+}
 
 #[derive(Component)]
 #[storage(VecStorage)]
-pub struct BoxSpot {}
+pub struct BoxSpot {
+    pub colour: BoxColour,
+}
 
 #[derive(Component, Default)]
 #[storage(NullStorage)]
