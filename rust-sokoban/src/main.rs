@@ -11,6 +11,8 @@ mod entities;
 mod map;
 mod resources;
 mod systems;
+mod events;
+mod audio;
 
 use crate::components::*;
 use crate::map::*;
