@@ -1,4 +1,4 @@
-use crate::components::{Position, BoxColour};
+use crate::components::{BoxColour, Position};
 use crate::entities::*;
 use specs::World;
 

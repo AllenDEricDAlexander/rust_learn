@@ -1,10 +1,12 @@
+use crate::audio::AudioStore;
+use crate::events::Event;
 use ggez::event::KeyCode;
 use specs::World;
 
-use std::fmt::{self, Display};
-use std::time::Duration;
-use crate::audio::AudioStore;
-use crate::events::Event;
+use std::{
+    fmt::{self, Display},
+    time::Duration,
+};
 
 // Resources
 #[derive(Default)]
@@ -29,7 +31,7 @@ impl Display for GameplayState {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         fmt.write_str(match self {
             GameplayState::Playing => "Playing",
-            GameplayState::Won => "Won"
+            GameplayState::Won => "Won",
         })?;
         Ok(())
     }

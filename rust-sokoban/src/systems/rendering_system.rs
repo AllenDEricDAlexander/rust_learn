@@ -1,16 +1,16 @@
-
-
-
 use crate::components::*;
-use crate::resources::*;
 use crate::constants::TILE_WIDTH;
+use crate::resources::*;
 
-use ggez::{Context, graphics::{self, DrawParam, Image, Color, spritebatch::SpriteBatch}, timer};
-use specs::{Join, ReadStorage, System, Read};
+use ggez::{
+    graphics::{self, spritebatch::SpriteBatch, Color, DrawParam, Image},
+    timer, Context,
+};
 use glam::Vec2;
 use itertools::Itertools;
+use specs::{Join, Read, ReadStorage, System};
 
-use std::{time::Duration, collections::HashMap};
+use std::{collections::HashMap, time::Duration};
 
 pub struct RenderingSystem<'a> {
     pub context: &'a mut Context,
@@ -30,7 +30,7 @@ impl RenderingSystem<'_> {
             None,
             graphics::FilterMode::Linear,
         )
-            .expect("expected drawing queued text");
+        .expect("expected drawing queued text");
     }
 
     pub fn get_image(&mut self, renderable: &Renderable, delta: Duration) -> String {
